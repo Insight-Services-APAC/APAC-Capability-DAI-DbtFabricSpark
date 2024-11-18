@@ -3,15 +3,15 @@ import os
 import dbt.exceptions
 
 from dbt.adapters.sql import SQLConnectionManager
-from dbt.contracts.connection import ConnectionState, AdapterResponse
-from dbt.events import AdapterLogger
-from dbt.events.functions import fire_event
-from dbt.events.types import ConnectionUsed, SQLQuery, SQLQueryStatus
+from dbt.adapters.contracts.connection import ConnectionState, AdapterResponse
+from dbt.adapters.events.logging import AdapterLogger
+from dbt_common.events.functions import fire_event
+from dbt.adapters.events.types import ConnectionUsed, SQLQuery, SQLQueryStatus
 from dbt.utils import DECIMALS
 from dbt.adapters.fabricspark.livysession import LivySessionConnectionWrapper, LivySessionManager
 
-from dbt.contracts.connection import Connection
-from dbt.dataclass_schema import StrEnum
+from dbt.adapters.contracts.connection import Connection
+from dbt_common.dataclass_schema import StrEnum
 from typing import Any, Optional, Union, Tuple, List, Generator, Iterable, Sequence
 from abc import ABC, abstractmethod
 import time

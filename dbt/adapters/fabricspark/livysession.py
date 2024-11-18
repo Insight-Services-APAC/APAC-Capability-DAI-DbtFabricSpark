@@ -1,6 +1,9 @@
 from __future__ import annotations
 import json
 import time
+
+import dbt_common
+import dbt_common.exceptions
 import requests
 from requests.models import Response
 from urllib import response
@@ -9,7 +12,7 @@ import datetime as dt
 from types import TracebackType
 from typing import Any
 import dbt.exceptions
-from dbt.events import AdapterLogger
+from dbt.adapters.events.logging import AdapterLogger
 from dbt.utils import DECIMALS
 from azure.core.credentials import AccessToken
 from azure.identity import AzureCliCredential, ClientSecretCredential
@@ -171,7 +174,7 @@ class LivySession:
                 break
             elif res["livyInfo"]["currentState"] == "dead":
                 print("ERROR, cannot create a livy session")
-                raise dbt.exceptions.FailedToConnectException("failed to connect")
+                raise dbt_common.exceptions.ConnectionError("failed to connect")
         print("Livy session created successfully")
         return self.session_id
 
@@ -365,7 +368,7 @@ class LivyCursor:
             self._rows = None
             self._schema = None
 
-            raise dbt.exceptions.DbtDatabaseError(
+            raise dbt_common.exceptions.DbtDatabaseError(
                 "Error while executing query: " + res["output"]["evalue"]
             )
 
