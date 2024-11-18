@@ -31,4 +31,4 @@ wheel~=0.42
 # Adapter specific dependencies
 mock~=5.1
 azure-core~=1.26.4
-azure-identity~=1.13.0
+azure-identity~=1.19.0
